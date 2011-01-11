@@ -1,0 +1,4 @@
+name = Kawaii
+description = Example theme for demonstrating Themepacket's API.
+core = 6.x
+engine = phptemplate
