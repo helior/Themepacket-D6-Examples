@@ -1,0 +1,6 @@
+Put the contents of each folder into their respective location in your sites/* directory.
+
+Required modules for demonstration purposes are:
+CCK (http://drupal.org/project/cck)
+Views (http://drupal.org/project/views)
+Features (http://drupal.org/project/features)

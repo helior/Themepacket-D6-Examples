@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ *  This ficticous module "Sugoi" is an example of how to implement Themepacket
+ *  into your own modules. If something is worth mentioning it will be
+ *  documented in the comments.
+ */
+
+/**
+ * @todo form builder with theme function implementation
+ * @todo form builder with tpl.php implementation
+ * @todo form_alter with custom #theme
+ * @todo block with tpl.php implementation
+ * @todo block with theme function implementation
+ * @todo page callback with 'theme' page callback
+ */
+/******************************************************************************
+ * Drupal Hooks
+ *****************************************************************************/
+
+/**
+ * Implementation of hook_menu().
+ */
+function sugoi_menu() {
+  $items['sugoi/contents'] = array(
+    'title' => 'Sugoi Contents',
+    'description' => 'Table of contents for all menu items in this module.',
+    'page callback' => 'theme',
+    'page arguments' => array('sugoi_contents'),
+    'access callback' => TRUE,
+  );
+  
+  return $items;
+}
+
+
+/**
+ * Implementation of hook_theme().
+ */
+function sugoi_theme($existing, $type, $theme, $path) {
+  // Since this module depends on themepacket, we can simply return
+  // themepacket_discover(), as opposed to the theme "Kawaii", which has to
+  // first check if the module is available before calling
+  // themepacket_discover().
+  // 
+  // If your module needs to manually register theme hooks, then it may do so
+  // like this:
+  // 
+  // @code
+  // 
+  //  function mymodule_theme($existing, $type, $theme, $path) {
+  //    $hooks['mymodule_samurai] = array(
+  //      'arguments' => array('sword' => 'Hattori Hanzō', 'prefecture' => 'Okinawa'),
+  //      'pattern' => 'mymodule_samurai__',
+  //      'file' => 'mymodule.theme.inc',
+  //    );
+  //    return $hooks += themepacket_discover($existing, $type, $theme, $path);
+  //  }
+  // 
+  // @endcode
+  // 
+  // Note that is is good practice to prefix your theme hooks with your module
+  // name, as to avoid any namespace collisions. Themepacket will always do
+  // this on your behalf.
+  return themepacket_discover($existing, $type, $theme, $path);
+}

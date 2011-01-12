@@ -1,0 +1,5 @@
+name = Sugoi
+description = Example module for demonstrating Themepacket's API.
+core = 6.x
+
+dependencies[] = themepacket
