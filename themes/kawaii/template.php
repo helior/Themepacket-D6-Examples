@@ -36,9 +36,9 @@ function kawaii_theme($existing, $type, $theme, $path) {
     
     // Drupal 6 allows you to override templates such as node.tpl.php and even
     // further override that with node-story.tpl.php, however, this will only
-    // work when both files are in the same hierarchy. This creates problems
-    // for us if we are trying to contain our theme implementations inside of
-    // logical sets, however, if we override the existing node theme
+    // work when both files are in the same hierarchy. This, however,
+    // introduces a problem if we want to organize the theme layer in a way
+    // that makes more sense, however, if we override the existing node theme
     // implementation in the registry and add a 'pattern' to it, we can achieve
     // some pretty interesting things.
     $hooks['node'] = array(
@@ -66,8 +66,8 @@ function kawaii_theme($existing, $type, $theme, $path) {
   
   else {
     // If Themepacket is not enabled and you're using a theme that heavily 
-    // depends on it, you may get a whitescreen. It's a good idea to let
-    // watchdog know about it so you may easily track and fix the error.
+    // depends on it, you may get a completely unstyled page. It's a good idea
+    // to let watchdog know about it so you may easily track and fix the error.
     watchdog('kawaii', 'Themepacket module is expected to be enabled for the Kawaii theme.', array(), WATCHDOG_ERROR);
   }
   

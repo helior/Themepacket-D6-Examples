@@ -13,7 +13,6 @@
  * @todo form_alter with custom #theme
  * @todo block with tpl.php implementation
  * @todo block with theme function implementation
- * @todo page callback with 'theme' page callback
  */
 /******************************************************************************
  * Drupal Hooks
@@ -27,7 +26,22 @@ function sugoi_menu() {
     'title' => 'Sugoi Contents',
     'description' => 'Table of contents for all menu items in this module.',
     'page callback' => 'theme',
+    // Here we are using a theme function that themepacket had discovered in
+    // the theme/contents directory. Notice that the theme hook is prefix with
+    // the module name. Also, as an important FYI, the name "contents" was
+    // derived from the filename contents.tpl.php, NOT the directory name. Once
+    // in the "theme" directory, you have the liberty to organize your folders
+    // any way you like, so structures like theme/page/main/contents.tpl.php
+    // will still register "sugoi_contents" as a theme hook.
     'page arguments' => array('sugoi_contents'),
+    'access callback' => TRUE,
+  );
+  
+  $items['sugoi/example'] = array(
+    'title' => 'Sugoi Page',
+    'description' => 'Example of a page callback that just returns theme().',
+    'page callback' => 'sugoi_page',
+    'page arguments' => array(),
     'access callback' => TRUE,
   );
   
@@ -40,8 +54,8 @@ function sugoi_menu() {
  */
 function sugoi_theme($existing, $type, $theme, $path) {
   // Since this module depends on themepacket, we can simply return
-  // themepacket_discover(), as opposed to the theme "Kawaii", which has to
-  // first check if the module is available before calling
+  // themepacket_discover(), as opposed to the methods used in the "Kawaii"
+  // theme, which has to first check if the module is available before calling
   // themepacket_discover().
   // 
   // If your module needs to manually register theme hooks, then it may do so
@@ -61,7 +75,15 @@ function sugoi_theme($existing, $type, $theme, $path) {
   // @endcode
   // 
   // Note that is is good practice to prefix your theme hooks with your module
-  // name, as to avoid any namespace collisions. Themepacket will always do
-  // this on your behalf.
+  // name, as to avoid any namespace collisions with other modules' theme
+  // hooks. Themepacket will always do this on your behalf.
   return themepacket_discover($existing, $type, $theme, $path);
+}
+
+
+/**
+ * Page callback
+ */
+function sugoi_page() {
+  return theme('sugoi_sushi');
 }
