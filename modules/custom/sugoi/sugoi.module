@@ -37,10 +37,26 @@ function sugoi_menu() {
     'access callback' => TRUE,
   );
   
-  $items['sugoi/example'] = array(
-    'title' => 'Sugoi Page',
+  $items['sugoi/sushi'] = array(
+    'title' => 'Sugoi Page (as a theme function)',
     'description' => 'Example of a page callback that just returns theme().',
-    'page callback' => 'sugoi_page',
+    'page callback' => 'sugoi_page_theme_function',
+    'page arguments' => array(),
+    'access callback' => TRUE,
+  );
+  
+  $items['sugoi/wasabi'] = array(
+    'title' => 'Sugoi Page (as a template)',
+    'description' => 'Example of a page callback that just returns theme().',
+    'page callback' => 'sugoi_page_template',
+    'page arguments' => array(),
+    'access callback' => TRUE,
+  );
+  
+  $items['sugoi/gyoza'] = array(
+    'title' => 'Sugoi Page (as a template with a preprocessor)',
+    'description' => 'Example of a page callback that just returns theme().',
+    'page callback' => 'sugoi_page_template_with_preprocessor',
     'page arguments' => array(),
     'access callback' => TRUE,
   );
@@ -84,6 +100,14 @@ function sugoi_theme($existing, $type, $theme, $path) {
 /**
  * Page callback
  */
-function sugoi_page() {
+function sugoi_page_theme_function() {
   return theme('sugoi_sushi');
+}
+
+function sugoi_page_template() {
+  return theme('sugoi_wasabi');
+}
+
+function sugoi_page_template_with_preprocessor() {
+  return theme('sugoi_gyoza');
 }
